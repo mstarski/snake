@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Snake 🐍</title>
+
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://livejs.com/live.js"></script>
+  </head>
+  <body>
+    <section class="scoreboard">
+      <p id="score" class="score">0</p>
+      <span>🍎</span>
+    </section>
+
+    <div id="start-screen" class="start-screen">
+      <p>Press &lt;Enter&gt; to start 🐍</p>
+    </div>
+
+    <canvas id="game" />
+
+    <script type="importmap">
+      {
+        "imports": {
+          "modules/snake": "./modules/snake.mjs",
+          "modules/apple": "./modules/apple.mjs",
+          "modules/game": "./modules/game.mjs",
+          "modules/controls": "./modules/controls.mjs",
+          "const": "./modules/const.mjs",
+          "utils": "./modules/utils.mjs"
+        }
+      }
+    </script>
+    <script type="module" src="index.js"></script>
+  </body>
+</html>
