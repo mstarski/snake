@@ -2,6 +2,8 @@ import { game } from "modules/game";
 import { setControls } from "modules/controls";
 import { BOARD_WIDTH, BOARD_HEIGHT } from "const";
 
+console.log(BOARD_WIDTH, BOARD_HEIGHT);
+
 const $ = (selector) => document.querySelector(selector);
 
 /**
@@ -48,6 +50,7 @@ function drawSnake() {
   if (!game.snake) return;
 
   game.snake.body.forEach(({ x, y }) => {
+    if (!x || !y) return;
     ctx.beginPath();
     ctx.fillStyle = "#454545";
     ctx.fillRect(x, y, game.snake.size, game.snake.size);

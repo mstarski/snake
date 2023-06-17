@@ -1,7 +1,7 @@
 import { Snake } from "modules/snake";
 import { Apple } from "modules/apple";
 import { BOARD_HEIGHT, BOARD_WIDTH } from "const";
-import { randInt } from "./utils.mjs";
+import { getDistance, randInt } from "./utils.mjs";
 
 class Game {
   #isStarted = false;
@@ -35,8 +35,8 @@ class Game {
     this.#isStarted = true;
 
     this.points = 0;
-    this.spawnApple();
     this.spawnSnake();
+    this.spawnApple();
 
     this.onStart();
   }
@@ -53,28 +53,45 @@ class Game {
   }
 
   spawnApple() {
-    this.apple = new Apple(
-      randInt(20, BOARD_WIDTH - 20),
-      randInt(20, BOARD_HEIGHT - 20)
-    );
+    let x, y;
+
+    while (true) {
+      x = randInt(20, BOARD_WIDTH - this.snake.size);
+      y = randInt(20, BOARD_HEIGHT - this.snake.size);
+
+      const collidesWithSnake = this.snake.body.some(
+        (part) => part.x === x && part.y === y
+      );
+
+      if (!collidesWithSnake) {
+        break;
+      }
+    }
+
+    this.apple = new Apple(x, y);
   }
 
   detectOutOfBounds() {
-    if (
-      this.snake.head.x >= BOARD_WIDTH ||
-      this.snake.head.x <= 0 ||
-      this.snake.head.y >= BOARD_HEIGHT ||
-      this.snake.head.y <= 0
-    ) {
+    const { x, y } = this.snake.head;
+    const distanceX = BOARD_WIDTH - x;
+    const distanceY = BOARD_HEIGHT - y;
+
+    if (distanceX >= BOARD_WIDTH || distanceX <= this.snake.size) {
+      this.makeOver();
+    } else if (distanceY >= BOARD_HEIGHT || distanceY <= this.snake.size) {
       this.makeOver();
     }
   }
 
   detectAppleEaten() {
-    const deltaX = Math.abs(this.snake.head.x - this.apple.x);
-    const deltaY = Math.abs(this.snake.head.y - this.apple.y);
+    const distance = getDistance(
+      this.snake.head.x,
+      this.snake.head.y,
+      this.apple.x,
+      this.apple.y
+    );
 
-    const isEaten = deltaX >= 0 && deltaX <= 15 && deltaY >= 0 && deltaY <= 15;
+    const isEaten = distance <= this.apple.size / 2 + this.snake.size / 2;
     if (!isEaten) return;
 
     this.snake.increaseLength();

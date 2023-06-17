@@ -1,4 +1,5 @@
 import { UP, DOWN, LEFT, RIGHT } from "const";
+import { getDistance } from "./utils.mjs";
 
 export class Snake {
   #moveDelay = 20;
@@ -36,8 +37,7 @@ export class Snake {
   }
 
   increaseLength() {
-    // TODO: what if new part spawns on bounds
-    this.body.push({ x: this.tail.x, y: this.tail.y });
+    this.body.push({ x: null, y: null });
   }
 
   increaseSpeed() {
@@ -81,16 +81,16 @@ export class Snake {
 
   detectCollision() {
     if (this.length === 1) return;
-    let collision = false;
 
-    this.body.forEach((part, i) => {
+    const collision = this.body.some((part, i) => {
+      let hasCollided = false;
+
       for (let j = i + 1; j < this.body.length; j++) {
         const otherPart = this.body[j];
-
-        if (part.x === otherPart.x && part.y === otherPart.y) {
-          collision = true;
-        }
+        const distance = getDistance(part.x, part.y, otherPart.x, otherPart.y);
+        hasCollided = distance <= this.size / 2;
       }
+      return hasCollided;
     });
 
     if (collision) {

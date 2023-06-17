@@ -1,12 +1,10 @@
-const express = require("express");
+const bs = require("browser-sync").create();
 const { resolve } = require("path");
 
-const port = process.env.PORT || 3000;
-const app = express();
+const STATIC_DIR = resolve(__dirname, "./static");
 
-app.use(express.static(resolve(__dirname, "static")));
+function startBrowserSync() {
+  bs.init({ server: STATIC_DIR, ui: false, watch: true, open: false });
+}
 
-app.listen(port, () => {
-  console.log(`App listening on port ${port} 🚚`);
-  console.log(`http://localhost:${port}`);
-});
+startBrowserSync();
