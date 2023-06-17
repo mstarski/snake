@@ -1,6 +1,7 @@
 # Snake 🐍
 
-Simple snake game implementation written in JavaScript and HTML canvas.
+Simple snake game implementation written in JavaScript and HTML canvas.<br>
+https://snake.codepark.pl/
 
 ## Dependencies
 
