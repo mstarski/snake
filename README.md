@@ -12,3 +12,6 @@ https://snake.codepark.pl/
 ```bash
 pnpm start:dev
 ```
+
+## Todo
+- [ ] Proper Firefox support (polyfill for `importmap` not working correctly)
