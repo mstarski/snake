@@ -1,5 +1,5 @@
 export class Apple {
-  #spriteUrl = "../gfx/apple.png";
+  #spriteUrl = "gfx/apple.png";
 
   x;
   y;
