@@ -4,10 +4,12 @@ import { BOARD_WIDTH, BOARD_HEIGHT } from "const";
 export class Drawer {
   #canvas;
   #ctx;
+  #backgroundImage = new Image();
 
   constructor(canvas) {
     this.#canvas = canvas;
     this.#ctx = canvas.getContext("2d");
+    this.#backgroundImage.src = "gfx/grass.png";
   }
 
   clear() {
@@ -17,10 +19,18 @@ export class Drawer {
   drawBounds() {
     this.#ctx.beginPath();
 
-    this.#ctx.strokeStyle = "#464646";
+    this.#ctx.strokeStyle = "#4d935f";
     this.#ctx.lineWidth = 10;
 
     this.#ctx.strokeRect(0, 0, BOARD_WIDTH, BOARD_HEIGHT);
+  }
+
+  drawBackground() {
+    this.#ctx.save();
+    this.#ctx.rect(0, 0, BOARD_WIDTH, BOARD_HEIGHT);
+    this.#ctx.clip();
+    this.#ctx.drawImage(this.#backgroundImage, 0, 0);
+    this.#ctx.restore();
   }
 
   drawSnake() {

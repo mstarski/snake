@@ -8,30 +8,34 @@
     <script src="https://livejs.com/live.js"></script>
   </head>
   <body>
-    <section class="scoreboard">
-      <p id="score" class="score">0</p>
-      <span>🍎</span>
-    </section>
+    <div class="background"></div>
+    <main class="container center">
+      <section class="scoreboard">
+        <p id="score" class="score">0</p>
+        <span>🍎</span>
+      </section>
 
-    <div id="start-screen" class="start-screen">
-      <p>Press &lt;Enter&gt; to start 🐍</p>
-    </div>
+      <div id="start-screen" class="start-screen center">
+        <p>Press &lt;Enter&gt; to start 🏁</p>
+      </div>
 
-    <canvas id="game" />
+      <canvas id="game" />
 
-    <script type="importmap">
-      {
-        "imports": {
-          "modules/snake": "./modules/snake.mjs",
-          "modules/apple": "./modules/apple.mjs",
-          "modules/game": "./modules/game.mjs",
-          "modules/controls": "./modules/controls.mjs",
-          "modules/drawer": "./modules/drawer.mjs",
-          "const": "./modules/const.mjs",
-          "utils": "./modules/utils.mjs"
+      <script type="importmap">
+        {
+          "imports": {
+            "modules/snake": "./modules/snake.mjs",
+            "modules/apple": "./modules/apple.mjs",
+            "modules/game": "./modules/game.mjs",
+            "modules/controls": "./modules/controls.mjs",
+            "modules/drawer": "./modules/drawer.mjs",
+            "modules/audio-player": "./modules/audio-player.mjs",
+            "const": "./modules/const.mjs",
+            "utils": "./modules/utils.mjs"
+          }
         }
-      }
-    </script>
-    <script type="module" src="index.js"></script>
+      </script>
+      <script type="module" src="index.js"></script>
+    </main>
   </body>
 </html>

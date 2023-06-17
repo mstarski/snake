@@ -28,7 +28,7 @@ class Game {
     if (this.#isStarted) return;
 
     this.#isStarted = true;
-    this.#points = 0;
+    this.setPoints(0);
 
     this.spawnSnake();
     this.spawnApple();

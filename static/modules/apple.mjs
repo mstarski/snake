@@ -3,14 +3,14 @@ export class Apple {
 
   x;
   y;
-  size = 20;
+  size = 24;
   sprite;
 
   constructor(x, y) {
     this.x = x;
     this.y = y;
 
-    this.sprite = new Image();
+    this.sprite = new Image(this.size, this.size);
     this.sprite.src = this.#spriteUrl;
   }
 }

@@ -1,24 +1,55 @@
-@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap");
+
+* {
+  margin: 0;
+}
 
 body {
-  font-family: "IBM Plex Sans", sans-serif;
+  font-family: "JetBrains Mono", sans-serif;
+  height: 100vh;
   position: relative;
+  color: #f6f6f6;
+}
+
+.center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.background {
+  width: 100%;
+  height: 100%;
+  background: url("gfx/background.webp") no-repeat center;
+  background-size: cover;
+  filter: brightness(0.5);
+}
+
+.container {
+  top: 45%;
   width: 800px;
-  margin: auto;
 }
 
 .scoreboard {
   display: flex;
   justify-content: center;
   align-items: center;
-
+  margin-bottom: 1rem;
   font-size: 24px;
-  color: #464646;
+  font-weight: 800;
+}
+
+.score {
+  margin-right: 0.5rem;
 }
 
 .start-screen {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  display: flex;
+  width: 400px;
+  height: 200px;
+  justify-content: center;
+  align-items: center;
+  background: #4d935f;
+  border-radius: 16px;
 }

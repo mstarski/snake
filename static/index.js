@@ -3,6 +3,7 @@ import { controller } from "modules/controls";
 import { BOARD_WIDTH, BOARD_HEIGHT } from "const";
 import { Drawer } from "modules/drawer";
 import { $ } from "utils";
+import { audioPlayer } from "modules/audio-player";
 
 /**
 @type HTMLCanvasElement
@@ -16,6 +17,7 @@ const drawer = new Drawer(canvas);
 
 function loop() {
   drawer.clear();
+  drawer.drawBackground();
   drawer.drawBounds();
   drawer.drawSnake();
 
@@ -36,16 +38,19 @@ function loop() {
   game.onPointsChanged = (value) => {
     const scoreEl = $("#score");
     scoreEl.textContent = value;
+    audioPlayer.playPointSfx();
   };
 
   game.onStart = () => {
     const startScreenEl = $("#start-screen");
     startScreenEl.style.display = "none";
+    audioPlayer.playStartSfx();
   };
 
   game.onOver = () => {
     const startScreenEl = $("#start-screen");
-    startScreenEl.style.display = "block";
+    startScreenEl.style.display = "flex";
+    audioPlayer.playGameOverSfx();
   };
 
   requestAnimationFrame(loop);
