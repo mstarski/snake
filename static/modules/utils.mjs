@@ -1,3 +1,5 @@
+export const $ = (selector) => document.querySelector(selector);
+
 export const randInt = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };

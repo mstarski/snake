@@ -1,12 +1,11 @@
 import { UP, DOWN, LEFT, RIGHT } from "const";
-import { getDistance } from "./utils.mjs";
 
 export class Snake {
   #moveDelay = 20;
   #moveDelayTreshold = 10;
   #delayCounter = 0;
 
-  direction = UP;
+  #direction = UP;
   size = 24;
   body = [];
 
@@ -24,6 +23,10 @@ export class Snake {
     return this.body[this.body.length - 1];
   }
 
+  get direction() {
+    return this.#direction;
+  }
+
   setDirection(direction) {
     if (![UP, DOWN, LEFT, RIGHT].includes(direction))
       throw new Error("Invalid direction.");
@@ -33,7 +36,7 @@ export class Snake {
     if (this.direction === LEFT && direction === RIGHT) return;
     if (this.direction === RIGHT && direction === LEFT) return;
 
-    this.direction = direction;
+    this.#direction = direction;
   }
 
   increaseLength() {
@@ -76,10 +79,10 @@ export class Snake {
     }
 
     this.#delayCounter = 0;
-    this.detectCollision();
+    this.detectSelfCollision();
   }
 
-  detectCollision() {
+  detectSelfCollision() {
     if (this.length === 1) return;
 
     const collision = this.body.some((part, i) => {
@@ -87,8 +90,8 @@ export class Snake {
 
       for (let j = i + 1; j < this.body.length; j++) {
         const otherPart = this.body[j];
-        const distance = getDistance(part.x, part.y, otherPart.x, otherPart.y);
-        hasCollided = distance <= this.size / 2;
+
+        hasCollided = part.x === otherPart.x && part.y === otherPart.y;
       }
       return hasCollided;
     });

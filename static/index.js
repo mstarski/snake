@@ -1,69 +1,26 @@
 import { game } from "modules/game";
-import { setControls } from "modules/controls";
+import { controller } from "modules/controls";
 import { BOARD_WIDTH, BOARD_HEIGHT } from "const";
-
-console.log(BOARD_WIDTH, BOARD_HEIGHT);
-
-const $ = (selector) => document.querySelector(selector);
+import { Drawer } from "modules/drawer";
+import { $ } from "utils";
 
 /**
 @type HTMLCanvasElement
 */
-const canvas = document.querySelector("#game");
-const ctx = canvas.getContext("2d");
+const canvas = $("#game");
 
 canvas.width = BOARD_WIDTH;
 canvas.height = BOARD_HEIGHT;
 
-function clear() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-}
-
-function drawBounds() {
-  ctx.beginPath();
-
-  ctx.strokeStyle = "#464646";
-  ctx.lineWidth = 10;
-
-  ctx.moveTo(0, 0);
-  ctx.lineTo(0, BOARD_HEIGHT);
-  ctx.lineTo(BOARD_WIDTH, BOARD_HEIGHT);
-  ctx.lineTo(BOARD_WIDTH, 0);
-  ctx.lineTo(0, 0);
-
-  ctx.stroke();
-}
-
-function drawApple() {
-  ctx.beginPath();
-
-  ctx.drawImage(
-    game.apple.sprite,
-    game.apple.x,
-    game.apple.y,
-    game.apple.size,
-    game.apple.size
-  );
-}
-
-function drawSnake() {
-  if (!game.snake) return;
-
-  game.snake.body.forEach(({ x, y }) => {
-    if (!x || !y) return;
-    ctx.beginPath();
-    ctx.fillStyle = "#454545";
-    ctx.fillRect(x, y, game.snake.size, game.snake.size);
-  });
-}
+const drawer = new Drawer(canvas);
 
 function loop() {
-  clear();
-  drawBounds();
-  drawSnake();
+  drawer.clear();
+  drawer.drawBounds();
+  drawer.drawSnake();
 
   if (game.started) {
-    drawApple();
+    drawer.drawApple();
     game.snake.move(game.snake.size);
 
     game.detectOutOfBounds();
@@ -74,7 +31,7 @@ function loop() {
 }
 
 (function main() {
-  setControls();
+  controller.setControls();
 
   game.onPointsChanged = (value) => {
     const scoreEl = $("#score");

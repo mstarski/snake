@@ -24,17 +24,12 @@ class Game {
     return this.#points;
   }
 
-  set points(value) {
-    this.#points = value;
-    this.onPointsChanged(value);
-  }
-
   start() {
     if (this.#isStarted) return;
 
     this.#isStarted = true;
+    this.#points = 0;
 
-    this.points = 0;
     this.spawnSnake();
     this.spawnApple();
 
@@ -71,6 +66,11 @@ class Game {
     this.apple = new Apple(x, y);
   }
 
+  setPoints(value) {
+    this.#points = value;
+    this.onPointsChanged(value);
+  }
+
   detectOutOfBounds() {
     const { x, y } = this.snake.head;
     const distanceX = BOARD_WIDTH - x;
@@ -98,7 +98,7 @@ class Game {
     this.snake.increaseSpeed();
     this.spawnApple();
 
-    this.points += 1;
+    this.setPoints(this.#points + 1);
   }
 }
 
