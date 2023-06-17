@@ -6,9 +6,21 @@
 
     <link rel="stylesheet" href="style.css" />
     <script src="https://livejs.com/live.js"></script>
+
+    <meta property="og:title" content="A Snake Game" />
+    <meta
+      property="og:image"
+      content="https://html-snake.s3.eu-west-1.amazonaws.com/og-image.jpg"
+    />
   </head>
   <body>
     <div class="background"></div>
+    <aside class="credits">
+      <a class="link" href="https://github.com/mstarski/snake">
+        <img class="link__icon" src="gfx/github.svg" />
+      </a>
+    </aside>
+
     <main class="container center">
       <section class="scoreboard">
         <p id="score" class="score">0</p>
@@ -19,7 +31,18 @@
         <p>Press &lt;Enter&gt; to start 🏁</p>
       </div>
 
-      <canvas id="game" />
+      <canvas id="game"></canvas>
+
+      <section class="instructions">
+        Controls ⌨️
+        <p>Use WASD keys to control the snake</p>
+      </section>
+
+      <!-- importmap polyfill -->
+      <script
+        async
+        src="https://ga.jspm.io/npm:es-module-shims@1.7.3/dist/es-module-shims.js"
+      ></script>
 
       <script type="importmap">
         {
