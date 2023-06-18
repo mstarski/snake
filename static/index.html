@@ -5,7 +5,6 @@
     <title>Snake 🐍</title>
 
     <link rel="stylesheet" href="style.css" />
-    <script src="https://livejs.com/live.js"></script>
 
     <meta property="og:title" content="A Snake Game" />
     <meta
@@ -37,28 +36,35 @@
         Controls ⌨️
         <p>Use WASD keys to control the snake</p>
       </section>
-
-      <!-- importmap polyfill -->
-      <script
-        async
-        src="https://ga.jspm.io/npm:es-module-shims@1.7.3/dist/es-module-shims.js"
-      ></script>
-
-      <script type="importmap">
-        {
-          "imports": {
-            "modules/snake": "./modules/snake.mjs",
-            "modules/apple": "./modules/apple.mjs",
-            "modules/game": "./modules/game.mjs",
-            "modules/controls": "./modules/controls.mjs",
-            "modules/drawer": "./modules/drawer.mjs",
-            "modules/audio-player": "./modules/audio-player.mjs",
-            "const": "./modules/const.mjs",
-            "utils": "./modules/utils.mjs"
-          }
-        }
-      </script>
-      <script type="module" src="index.js"></script>
     </main>
+
+    <script>
+      window.esmsInitOptions = {
+        shimMode: true,
+        enforceIntegrity: true,
+        mapOverrides: true,
+      };
+    </script>
+
+    <script
+      async
+      src="https://unpkg.com/es-module-shims@0.13.1/dist/es-module-shims.js"
+    ></script>
+
+    <script type="importmap-shim">
+      {
+        "imports": {
+          "modules/snake": "./modules/snake.js",
+          "modules/apple": "./modules/apple.js",
+          "modules/game": "./modules/game.js",
+          "modules/controls": "./modules/controls.js",
+          "modules/drawer": "./modules/drawer.js",
+          "modules/audio-player": "./modules/audio-player.js",
+          "const": "./modules/const.js",
+          "utils": "./modules/utils.js"
+        }
+      }
+    </script>
+    <script type="module-shim" src="index.js"></script>
   </body>
 </html>

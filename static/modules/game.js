@@ -1,7 +1,7 @@
 import { Snake } from "modules/snake";
 import { Apple } from "modules/apple";
 import { BOARD_HEIGHT, BOARD_WIDTH } from "const";
-import { getDistance, randInt } from "./utils.mjs";
+import { getDistance, randInt } from "utils";
 
 class Game {
   #isStarted = false;
